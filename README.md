@@ -18,6 +18,20 @@ root and `cities/block-study/index.html` as the direct experiment URL. Relative
 links and built asset paths also support a subdirectory deployment. The city
 requires WebGL 2. The gallery is static HTML, CSS and a local preview image.
 
+## Run the tests
+
+Use Node.js 22 with npm to reproduce the verified setup.
+
+```sh
+npm ci
+npm test
+npm run build
+```
+
+The clean install and production build completed successfully. Vitest 4.1.12
+discovered `tests/geometry.test.js`, and all three tests for the seeded
+`randomFrom` generator passed.
+
 ## Explore Meridian & Ninth
 
 Use the year slider or select a printed year. The focused slider supports the
