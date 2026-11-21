@@ -1,0 +1,68 @@
+* { box-sizing: border-box; }
+:root {
+  color-scheme: light;
+  --paper: #f4efe4;
+  --ink: #241e1a;
+  --muted: #625950;
+  --rule: #c6b9aa;
+  --signal: #b63320;
+  --dark: #272923;
+  --sans: "Avenir Next", Avenir, "Helvetica Neue", system-ui, sans-serif;
+  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --mono: ui-monospace, "Courier New", monospace;
+  font-family: var(--sans);
+  color: var(--ink);
+  background: var(--paper);
+}
+body { margin: 0; }
+a { color: inherit; }
+button, input { font: inherit; }
+:where(a, button, input, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--signal);
+  outline-offset: 4px;
+}
+.wrap { width: min(1280px, calc(100% - 80px)); margin-inline: auto; }
+.masthead { min-height: 70px; display: flex; align-items: center; justify-content: space-between; gap: 16px; border-bottom: 1px solid var(--rule); }
+.wordmark { font-size: 15px; font-weight: 750; display: inline-flex; align-items: center; gap: 11px; text-decoration: none; }
+.wordmark i { display: inline-block; width: 21px; height: 21px; border: 1px solid var(--signal); position: relative; }
+.wordmark i::before, .wordmark i::after { content: ""; position: absolute; background: var(--signal); }
+.wordmark i::before { inset: 9px -3px auto; height: 1px; }
+.wordmark i::after { inset: -3px auto -3px 9px; width: 1px; }
+.text-link { font: 600 12px var(--mono); text-underline-offset: 4px; }
+.text-link span { margin-left: 6px; }
+.intro { display: grid; grid-template-columns: 1fr minmax(230px, 32%); align-items: end; column-gap: 40px; padding-block: clamp(36px, 5.2vw, 72px) clamp(29px, 4vw, 55px); }
+.intro h1 { margin: 0; font: 400 clamp(4rem, 9vw, 7.25rem)/.88 var(--serif); letter-spacing: -.04em; }
+.intro h1 span { color: var(--signal); }
+.intro p { margin: 0; max-width: 32ch; color: var(--muted); font-size: 17px; line-height: 1.55; }
+.index-heading { border-block: 1px solid var(--rule); margin: 0 0 20px; padding: 13px 0; font: 600 12px var(--mono); text-transform: uppercase; letter-spacing: .09em; }
+.entry { display: grid; grid-template-columns: minmax(0, 2.4fr) minmax(250px, 1fr); gap: clamp(22px, 4vw, 62px); align-items: start; }
+.entry + .entry { border-top: 1px solid var(--rule); padding-top: 20px; margin-top: 44px; }
+.plate { margin: 0; background: var(--dark); color: var(--paper); }
+.plate img { display: block; width: 100%; height: auto; aspect-ratio: 1400 / 820; object-fit: cover; background: #c2a37f; }
+.plate figcaption { display: flex; justify-content: space-between; gap: 12px; padding: 12px 14px; font: 12px/1.4 var(--mono); }
+.entry-copy { padding: 14px 0 0; }
+.entry-meta { font: 600 12px/1.4 var(--mono); color: var(--signal); margin: 0 0 14px; text-transform: uppercase; letter-spacing: .06em; }
+.entry-meta span { margin-inline: 3px; }
+.entry h3 { font: 400 clamp(2.7rem, 4.1vw, 4rem)/.97 var(--serif); letter-spacing: -.04em; margin: 0 0 14px; max-width: 13ch; }
+.entry-copy > p:not(.entry-meta) { margin: 0 0 21px; color: var(--muted); line-height: 1.6; max-width: 34ch; }
+.enter { display: inline-flex; min-height: 48px; gap: 26px; justify-content: space-between; align-items: center; padding: 0 15px; background: var(--signal); color: white; font-size: 14px; font-weight: 700; text-decoration: none; }
+.enter:hover { background: #832415; }
+.model-setup { margin: 21px 0 0; font-size: 14px; line-height: 1.55; }
+.entry details { margin-top: 15px; max-width: 36ch; border-top: 1px solid var(--rule); font-size: 14px; padding-top: 12px; }
+.entry summary { cursor: pointer; min-height: 32px; }
+.entry details :is(blockquote, p) { line-height: 1.55; margin: 8px 0 14px; overflow-wrap: anywhere; }
+.entry dt { font-weight: 700; }
+.entry dd { margin: 2px 0 0; }
+.entry blockquote { white-space: pre-wrap; }
+.site-footer { display: flex; justify-content: space-between; gap: 12px; border-top: 1px solid var(--rule); margin-block-start: 56px; padding-block: 17px 25px; font: 12px var(--mono); }
+@media (max-width: 720px) {
+  .wrap { width: calc(100% - 32px); }
+  .masthead { min-height: 58px; }
+  .intro { grid-template-columns: 1fr; gap: 20px; }
+  .intro h1 { font-size: clamp(3.25rem, 14vw, 5rem); }
+  .intro p { font-size: 16px; }
+  .entry { grid-template-columns: 1fr; gap: 14px; }
+  .entry h3 { max-width: none; }
+  .entry-copy { padding-top: 0; }
+  .site-footer { margin-block-start: 42px; }
+}

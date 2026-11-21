@@ -1,43 +1,48 @@
-# Chrono City 1945–2025
+# Chrono City
 
-An interactive 3D city block that transforms through eighty years of history. Pick a
-year on the timeline and the buildings, storefronts, billboards, vehicles, pedestrians,
-lighting and sound cross-fade into that era — in front of you, in real time.
+Chrono City is a static gallery of interactive city experiments. The first entry,
+**Meridian & Ninth**, reconstructs the same street corner in 1945, 1965, 1985,
+2005, 2025 and 2055. The gallery includes a still from the 1965 reconstruction.
 
-## Running it
+## Develop and publish
 
-```bash
-npm install
-npm run dev     # local dev server
-npm run build   # type-check + production build into dist/
-npm run preview # serve the production build
-npm run lint
+```sh
+npm ci
+npm run dev
+npm run build
+npm run preview
 ```
 
-## The five eras
+Deploy the contents of `dist/` to a static HTTP host. Serve `index.html` at the
+root and `cities/block-study/index.html` as the direct experiment URL. Relative
+links and built asset paths also support a subdirectory deployment. The city
+requires WebGL 2. The gallery is static HTML, CSS and a local preview image.
 
-| Year | Era                   | On the street                                                                 |
-| ---- | --------------------- | ----------------------------------------------------------------------------- |
-| 1945 | Postwar Austerity     | Brick walk-ups, hand-painted signs, victory bonds, olive sedans, wool coats    |
-| 1965 | Jet-Age Boom          | Pastel stucco, chrome tailfins, googie diners, tailored suits, bright noon     |
-| 1985 | Neon Dusk             | Concrete towers, video arcades, boxy hatchbacks, leather, sodium haze          |
-| 2005 | Internet Age          | Glass-and-steel infill, dot-com billboards, crossovers, hoodies, blue hour     |
-| 2025 | The Living City       | Timber-and-glass towers, green roofs, silent EVs, athleisure, golden sunset     |
+## Explore Meridian & Ninth
 
-## Controls
+Use the year slider or select a printed year. The focused slider supports the
+arrow keys, Home and End. Drag the scene to orbit and scroll or pinch to
+approach. Right-drag or drag with two fingers to pan. With the scene focused,
+the arrows orbit, Shift + arrows pan, and + / − zoom. Street view and Reset view
+provide two starting viewpoints. City sound starts when you turn it on.
 
-- **Timeline** — click a year, drag the slider, or press `1`–`5`
-- **← / →** — step one era back or forward
-- **Drag** — orbit the camera; **scroll / pinch** — zoom (clamped)
-- **M** or the sound button — mute/unmute the city
-- **Reset view** — return to the opening composition
+The scene keeps the street grid and the camera between eras. `eras.js` describes
+the six reconstructions, with each era supplying its own city and sound
+parameters. Three.js assembles the geometry and paints signs from those
+parameters. Web Audio synthesizes the street ambience locally.
 
-## How it is built
+## Add an experiment
 
-- React + TypeScript + Vite shell; Three.js for the scene.
-- Everything is procedural at runtime: canvas-painted facades, signs, billboards and sky
-  textures; geometry generated in `src/scene/*`; all sound is synthesized with the Web
-  Audio API. There are no image, font or audio assets and no network requests.
-- One prebuilt era group per year (built after first paint), cross-faded on switch, with a
-  read-mostly `window.__chrono` debug hook exposing era state, vehicle/pedestrian
-  positions and counts, camera, zoom limits, renderer memory counts and audio state.
+1. Create an independent HTML entry, for example `cities/another-study/index.html`.
+   Put its scripts, styles and preview image beside it, and add a relative link
+   to `../../index.html` for the gallery.
+2. Add an object to [lab/catalogue.js](lab/catalogue.js) with the title, subtitle,
+   page and preview paths relative to the project root, preview alt text, preview
+   year, ordered years, description, requested model names and verbatim prompt.
+   The models field records the requested setup. Add actual model provenance
+   only if the execution record establishes it.
+3. Run `npm run build`. Vite uses the catalogue to render the gallery and build
+   every listed HTML page. Open the gallery and the new URL with `npm run preview`
+   to check the preview, links and any page-local assets.
+
+The requested setup for Meridian & Ninth is **GPT Astra 5.2 / GPT Sol 5.2**.
