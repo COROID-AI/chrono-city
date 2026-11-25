@@ -15,5 +15,10 @@
   "devDependencies": {
     "vite": "^6.4.4",
     "vitest": "^4.1.12"
+  },
+  "overrides": {
+    "vitest": {
+      "vite": "6.4.5"
+    }
   }
 }
